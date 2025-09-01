@@ -1,49 +1,83 @@
-# History files
-.Rhistory
-.Rapp.history
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Session Data files
-.RData
-.RDataTmp
+# C extensions
+*.so
+*.pyd
 
-# User-specific files
-.Ruserdata
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+MANIFEST
 
-# Example code in package build process
-*-Ex.R
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
 
-# Output files from R CMD build
-/*.tar.gz
+# PyInstaller
+*.manifest
+*.spec
 
-# Output files from R CMD check
-/*.Rcheck/
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
 
-# RStudio files
-.Rproj.user/
+# Unit test / coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*,cover
 
-# produced vignettes
-vignettes/*.html
-vignettes/*.pdf
+# Translations
+*.mo
+*.pot
 
-# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
-.httr-oauth
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints
 
-# knitr and R markdown default cache directories
-*_cache/
-/cache/
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
 
-# Temporary files created by R markdown
-*.utf8.md
-*.knit.md
+# Editor temporary files
+*~
+.*.swp
+*.sw?
 
-# R Environment Variables
-.Renviron
+# Python tooling caches
+.mypy_cache/
+.dmypy.json
+.pyre/
+.pytype/
 
-# pkgdown site
-docs/
+# Profiling
+.prof
+prof/
 
-# translation temp files
-po/*~
+# Environment / secrets
+.env
+.env.*
+secrets.*
+credentials.*
 
-# RStudio Connect folder
-rsconnect/
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
