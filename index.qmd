@@ -12,11 +12,8 @@ format:
     reference-location: margin
     citation-location: margin
     margin-references: true
-  ipynb:
-    output-file: "alphaearth-analysis.ipynb"
 bibliography: bibliography.bib
 execute:
-  keep-ipynb: true
   kernel: quarto-env
 ---
 
@@ -26,8 +23,6 @@ execute:
 This training pack demonstrates how to extract and analyse Google's AlphaEarth Foundations satellite embeddings at the building level, progressing from basic data extraction through advanced predictive modeling. The tutorial uses Liverpool City Region as a case study to illustrate a complete analytical workflow that combines satellite AI with urban datasets. Note: you will need a Google Account to access these data.
 
 All of the data used for this tutorial can be downloaded from the [Geographic Data Service](https://data.geods.ac.uk). These should be placed in a folder called `data` in your working directory.
-
-If you would like a notebook version of this tutorial that you can run interactively, download the Jupyter notebook [here](./index.ipynb).
 
 By the end of this training pack you will be able to:
 
