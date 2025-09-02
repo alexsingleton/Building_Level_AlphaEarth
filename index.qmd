@@ -293,7 +293,7 @@ From the diagram, a five cluster solutions looks to be an optimal initial choice
 #| message: false
 
 # Create clustergram to visualise optimal number of clusters
-cgram = Clustergram(range(1, 12), n_init=10, random_state=42, verbose=False)
+cgram = Clustergram(range(1, 12), init="random", n_init=10, random_state=42, verbose=False)
 cgram.fit(LCRCA_Samples)
 
 cgram.plot(figsize=(8, 5))
@@ -490,7 +490,7 @@ Given the smaller size of the building data we will cluster locally within Pytho
 #| message: false
 
 # Fit K-Means with 5 clusters and 1000 initialisations
-kmeans = KMeans(n_clusters=5, n_init=1000, random_state=42)
+kmeans = KMeans(n_clusters=5, init="random", n_init=1000, random_state=42)
 labels = kmeans.fit_predict(buildings_with_embeddings[embedding_cols])
 
 # Map numeric labels to letters
