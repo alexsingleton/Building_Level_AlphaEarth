@@ -20,9 +20,9 @@ execute:
 
 ## Learning Objectives
 
-This training pack demonstrates how to extract and analyse Google's AlphaEarth Foundations satellite embeddings at the building level, progressing from basic data extraction through advanced predictive modeling. The tutorial uses Liverpool City Region as a case study to illustrate a complete analytical workflow that combines satellite AI with urban datasets. Note: you will need a Google Account to access these data.
+This training pack demonstrates how to extract and analyse Google's AlphaEarth Foundations satellite embeddings at the building level, progressing from basic data extraction through advanced predictive modeling. The tutorial uses Liverpool City Region as a case study to illustrate a complete analytic workflow that combines satellite AI with urban datasets. Note: you will need a Google Account to access these data.
 
-All of the data used for this tutorial can be downloaded from the [Geographic Data Service](https://data.geods.ac.uk). These should be placed in a folder called `data` in your working directory.
+All of the data used for this tutorial can be downloaded from the [Geographic Data Service](https://data.geods.ac.uk/dataset/using-alphaearth-foundations-embeddings-for-building-analysis). These should be placed in a folder called `data` in your working directory.
 
 By the end of this training pack you will be able to:
 
@@ -38,7 +38,7 @@ By the end of this training pack you will be able to:
     * Perform k-means clustering on satellite embedding data to identify building typologies
     * Interpret cluster patterns and validate results using external datasets
 
-* **Advanced Analytical Techniques:**
+* **Advanced Analytic Techniques:**
     * Use UMAP (Uniform Manifold Approximation and Projection) to visualise high-dimensional embeddings in 2D
     * Calculate cosine similarity to identify buildings with similar characteristics
     * Integrate satellite embeddings with administrative datasets (Energy Performance Certificates)
@@ -57,13 +57,13 @@ By the end of this training pack you will be able to:
 AI-powered satellite analysis represents a fundamental shift from traditional remote sensing approaches. Unlike conventional methods that analyse individual satellite images in isolation, systems like AlphaEarth Foundations create unified digital representations by integrating multiple data sources into a number of embeddings. These embeddings aim to capture complex spatial and temporal patterns, with multiple applications of urban environments.
 
 ## What are AlphaEarth Embeddings?
-AlphaEarth Foundations [@brown2025alphaearthfoundationsembeddingfield] is an artificial intelligence model developed by Google DeepMind that functions as a comprehensive Earth observation system. Rather than requiring users to process raw satellite imagery, the model provides pre-computed embeddings[^1] that distil complex environmental information into 64 numerical values for every 10×10 meter pixel across Earth's terrestrial and coastal zones.
+AlphaEarth Foundations [@brown2025alphaearthfoundationsembeddingfield] is an artificial intelligence model developed by Google DeepMind that functions as a comprehensive Earth observation system. Rather than requiring users to process raw satellite imagery, the model provides pre-computed embeddings[^1] that distill complex environmental information into 64 numerical values for every 10×10 meter pixel across Earth's terrestrial and coastal zones.
 
 [^1]: Satellite embeddings are AI-generated feature representations of satellite imagery. Think of them as numerical "fingerprints" that capture the visual characteristics of a location - things like vegetation patterns, building density, water presence, and land use. Google provides pre-computed embeddings for the entire Earth, saving you from processing raw satellite images yourself.
 
 ## Setup
 
-There are a number of prerequisites and libraries required for this tutorial.
+We recommend using at least Python 3.11, and there are a number of prerequisites and libraries required for this tutorial.
 
 * **earthengine-api** is the official client library for Google Earth Engine. It allows you to access, process, and analyse geographic datasets hosted on Earth Engine directly from Python code.
 * **pandas** is used for data manipulation and analysis and provides data structures like DataFrame.
@@ -85,12 +85,14 @@ There are a number of prerequisites and libraries required for this tutorial.
 #| warning: false
 #| message: false
 #| output: false
-!pip install earthengine-api pyarrow scikit-learn pandas geopandas clustergram keplergl umap-learn seaborn shap # install packages
+!pip install earthengine-api pyarrow scikit-learn pandas geopandas clustergram keplergl umap-learn seaborn shap duckdb plotly # install packages
 ```
 ```{python}
 #| warning: false
 #| message: false
 #| output: false
+import io # Import for handling input/output operations
+from io import StringIO # allows you to treat strings as file-like objects
 import ee # Imports the Earth Engine API functionality
 import pandas as pd # Import the pandas functionality
 import geopandas as gpd # Import the geopandas functionality
@@ -105,7 +107,6 @@ import umap # Import for dimensionality reduction using UMAP
 import seaborn as sns # Import for statistical data visualisation
 import requests # Import for making HTTP requests
 from PIL import Image as PILImage # Import PIL Image functionality
-import io # Import for handling input/output operations
 import os # Import for operating system interface
 from sklearn.ensemble import RandomForestClassifier # Import Random Forest classifier
 from sklearn.model_selection import train_test_split # Import for splitting datasets
@@ -126,7 +127,8 @@ Next we need to initiate the authentication process for the Google Earth Engine 
 #| warning: false
 #| message: false
 #| output: false
-ee.Authenticate() # Follow the prompts to log in with your Google account.
+#| evaluation: false
+ee.Authenticate() # Follow the prompts to log in with your Google account
 ```
 
 ## Setup and Pixel Level Analysis
@@ -140,8 +142,8 @@ The following code initialises the Google Earth Engine API.
 #| warning: false
 #| message: false
 #| output: false
-# Initialise Earth Engine
-ee.Initialize()
+# Initialise Earth Engine (this project is called - alpha-tutorial-477812)
+ee.Initialize(project='alpha-tutorial-477812') # You may also need to specify your project, e.g. ee.Initialize(project='your_project_ID_here')
 ```
 ### Step 2: Import the Location Data
 
