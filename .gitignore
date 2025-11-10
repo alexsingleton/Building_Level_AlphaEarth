@@ -83,7 +83,4 @@ credentials.*
 Thumbs.db
 
 
-/data/*.parquet
-/data/*.gpkg
-/data/**/*.parquet
-/data/**/*.gpkg
+/data
